@@ -1,5 +1,6 @@
 package Collections.Ej1;
 
+//importamos todo o que necesitamos
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Iterator;
@@ -10,7 +11,7 @@ public class AppLibrillo {
     boolean meterdatos = true;
     int opcion;
     ArrayList<Librillo> listaLibrillos = new ArrayList<>();
-
+    // menu, para cando lle damos a 0 que é cando poñemos meterdatatos a falso
     while (meterdatos) {
       System.out.println("---------- MENÚ ----------");
       System.out.println("1. Engadir un libro");
@@ -26,6 +27,7 @@ public class AppLibrillo {
       switch (opcion) {
         case 1:
           sc.nextLine();
+          // imos metendo todos os valores do libro que queremos engadir
           System.out.print("Introduce a signatura: ");
           String signUsuario = sc.nextLine();
 
@@ -44,16 +46,21 @@ public class AppLibrillo {
           System.out.print("Introduce o nº de páxinas: ");
           int paxUsuario = sc.nextInt();
 
+          // creamos un obxecto cos datos que metemos antes e añadímolo a listiña
           Librillo libro1 = new Librillo(signUsuario, titUsuario, editUsuario, autorUsuario, isbnUsuario, paxUsuario);
           listaLibrillos.add(libro1);
 
+          // mostro a información para ver que se mete ben
           libro1.mostrarInfo();
           break;
         case 2:
           sc.nextLine();
           System.out.print("Introduce a signatura do libro que queres borrar: ");
+          // gardamos nunha variable a signatura para usala despois
           String signaturaBorrar = sc.nextLine();
           Iterator<Librillo> iterador = listaLibrillos.iterator();
+          // co iterador, imos mirando hasta o final, e se encontra un que teña esa
+          // signatura vaino borrar
           while (iterador.hasNext()) {
             Librillo librito = iterador.next();
             if (librito.getSignatura().equalsIgnoreCase(signaturaBorrar)) {
@@ -64,11 +71,15 @@ public class AppLibrillo {
 
         case 3:
           sc.nextLine();
+          // pedimos a signatura e gardámolo
           System.out.print("Introduce a sinatura do libro que queres: ");
           String sinaturaBuscar = sc.nextLine();
+          // reiniciamos o iterador
           iterador = listaLibrillos.iterator();
+          // imos mirando ata que atopemos a sinatura
           while (iterador.hasNext()) {
             Librillo libritoCambiar = iterador.next();
+            // cando a encontra pedimos ao usuario o que quere cambiar
             if (libritoCambiar.getSignatura().equalsIgnoreCase(sinaturaBuscar)) {
               System.out.println("Elixe que campo queres cambiar: ");
               System.out.println("1. Título");
@@ -78,6 +89,7 @@ public class AppLibrillo {
               System.out.println("5. Páxinas");
 
               System.out.print("Introduce a túa opción (número): ");
+              // despois selecciona a opción e pon a nova
               int opcionCambio = sc.nextInt();
               if (opcionCambio == 1) {
                 System.out.print("Introduce o novo título: ");
@@ -107,10 +119,13 @@ public class AppLibrillo {
           break;
         case 4:
           sc.nextLine();
+          // pedimos un cacho de título para buscar
           System.out.print("Introduce o cacho do título: ");
           String cacho = sc.nextLine();
           iterador = listaLibrillos.iterator();
           while (iterador.hasNext()) {
+            // imos mirando co iterador se hai algún que teña ese cacho ao principio do
+            // título, e seleccionámolo e mostramos a información
             Librillo libroBuscar = iterador.next();
             if (libroBuscar.getTitulo().startsWith(cacho)) {
               libroBuscar.mostrarInfo();
@@ -119,6 +134,7 @@ public class AppLibrillo {
           break;
         case 5:
           sc.nextLine();
+          // mostramos a lista
           System.out.println("-------- Lista de libros --------");
           iterador = listaLibrillos.iterator();
           while (iterador.hasNext()) {
@@ -135,5 +151,6 @@ public class AppLibrillo {
           break;
       }
     }
+    sc.close();
   }
 }
